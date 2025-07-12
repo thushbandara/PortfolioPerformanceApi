@@ -2,13 +2,8 @@
 
 namespace PortfolioPerformance.Api.Features.Assets.DTO.Request
 {
-    public record AddAssetsRequestDto
+    public record UpdateAssetsRequestDto
     {
-        /// <summary>
-        /// Represents the unique identifier for the portfolio to which the asset belongs.
-        /// </summary>
-        public Guid PortfolioId { get; set; }
-
         /// <summary>
         /// Represents the unique identifier for the asset.
         /// </summary>

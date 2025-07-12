@@ -6,12 +6,12 @@ using PortfolioPerformance.Data.Contracts;
 namespace PortfolioPerformance.Api.Features.Assets.Handlers
 {
     /// <summary>
-    /// Add an asset in the portfolio performance system.
+    /// Update an asset in the portfolio performance system.
     /// </summary>
-    public class AddAsset
+    public class UpdateAsset
     {
         /// <summary>
-        /// Endpoint for adding an asset.
+        /// Endpoint for updating an asset.
         /// </summary>
         public class EndPoint : IEndpoint
         {
@@ -21,27 +21,26 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             /// <param name="app">The application.</param>
             public void Configure(IEndpointRouteBuilder app)
             {
-                app.MapPost("/api/assert", async (AddAssetsRequestDto request, ISender _sender) =>
+                app.MapPatch("/api/assert{id}", async (Guid id, UpdateAssetsRequestDto request, ISender _sender) =>
                 {
-                    return Results.Ok(await _sender.Send(new AddAssetCommand(request)));
+                    return Results.Ok(await _sender.Send(new UpdateAssetCommand(id, request)));
                 })
-                .WithName("AddAssert")
+                .WithName("UpdateAssert")
                 .WithTags("Assert");
             }
         }
 
         /// <summary>
-        /// Command to add an asset.
+        /// Command to update an asset.
         /// </summary>
-        public record AddAssetCommand(AddAssetsRequestDto Request) : IRequest<Guid>;
+        public record UpdateAssetCommand(Guid Id, UpdateAssetsRequestDto Request) : IRequest<Guid>;
 
 
         /// <summary>
-        /// Handler for adding an asset.
+        /// Handler for updating an asset.
         /// </summary>
         public class Handler(IPortfolioPerformanceRepository<Data.Entities.Asset> _assetRepository,
-            IPortfolioPerformanceRepository<Data.Entities.Portfolio> _portfolioRepository,
-            IEntityMapper _mapper) : IRequestHandler<AddAssetCommand, Guid>
+           IEntityMapper _mapper) : IRequestHandler<UpdateAssetCommand, Guid>
         {
             /// <summary>
             /// Handles a request
@@ -51,15 +50,16 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             /// <returns>
             /// Response from the request
             /// </returns>
-            public async Task<Guid> Handle(AddAssetCommand request, CancellationToken cancellationToken)
+            public async Task<Guid> Handle(UpdateAssetCommand request, CancellationToken cancellationToken)
             {
-                var asset = await _portfolioRepository.GetByIdAsync(request.Request.PortfolioId)
-                                                ?? throw new KeyNotFoundException($"Portfolio with ID {request.Request.PortfolioId} not found.");
+                var asset = await _assetRepository.GetByIdAsync(request.Id)
+                                                ?? throw new KeyNotFoundException($"Asset with ID {request.Id} not found.");
 
 
-                var requestObj = _mapper.Map<AddAssetsRequestDto, Data.Entities.Asset>(request.Request);
+                var requestObj = _mapper.Map<UpdateAssetsRequestDto, Data.Entities.Asset>(request.Request);
+                requestObj.Id = asset.Id;
 
-                await _assetRepository.AddAsync(requestObj);
+                await _assetRepository.Update(requestObj);
 
                 return requestObj.Id;
             }
