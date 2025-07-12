@@ -21,12 +21,12 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             /// <param name="app">The application.</param>
             public void Configure(IEndpointRouteBuilder app)
             {
-                app.MapPost("/api/assert", async (AddAssetsRequestDto request, ISender _sender) =>
+                app.MapPost("/api/asset", async (AddAssetsRequestDto request, ISender _sender) =>
                 {
                     return Results.Ok(await _sender.Send(new AddAssetCommand(request)));
                 })
-                .WithName("AddAssert")
-                .WithTags("Assert");
+                .WithName("AddAsset")
+                .WithTags("Asset");
             }
         }
 

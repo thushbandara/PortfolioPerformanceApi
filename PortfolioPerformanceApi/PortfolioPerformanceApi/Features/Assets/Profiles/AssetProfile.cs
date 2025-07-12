@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PortfolioPerformance.Api.Features.Assets.DTO.Request;
+using PortfolioPerformance.Data.Common;
 
 namespace PortfolioPerformance.Api.Features.Assets.Profiles
 {
@@ -10,7 +11,11 @@ namespace PortfolioPerformance.Api.Features.Assets.Profiles
             CreateMap<AddAssetsRequestDto, Data.Entities.Asset>()
                 .ForMember(dest => dest.PortfolioId, opt => opt.MapFrom(src => src.PortfolioId))
                 .ForMember(dest => dest.AssetCode, opt => opt.MapFrom(src => src.AssetCode))
-                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type));
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<AssetType>(src.Type, true)));
+
+            CreateMap<UpdateAssetsRequestDto, Data.Entities.Asset>()
+               .ForMember(dest => dest.AssetCode, opt => opt.MapFrom(src => src.AssetCode))
+               .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<AssetType>(src.Type, true)));
         }
     }
 }

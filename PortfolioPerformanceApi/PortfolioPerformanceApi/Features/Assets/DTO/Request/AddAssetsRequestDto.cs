@@ -20,6 +20,6 @@ namespace PortfolioPerformance.Api.Features.Assets.DTO.Request
         /// </summary>
         /// <example>Stock</example>
         /// <example>Bonds</example>
-        public AssetType Type { get; set; }
+        public string Type { get; set; }
     }
 }
