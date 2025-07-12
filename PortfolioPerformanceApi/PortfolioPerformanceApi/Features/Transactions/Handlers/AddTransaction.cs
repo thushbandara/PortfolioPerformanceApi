@@ -53,11 +53,11 @@ namespace PortfolioPerformance.Api.Features.Transactions.Handlers
             /// </returns>
             public async Task<Guid> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
             {
-                var data = await _assetRepository.GetByIdAsync(request.Request.AssetId)
+                _ = await _assetRepository.GetByIdAsync(request.Request.AssetId)
                                                ?? throw new KeyNotFoundException($"Asset with ID {request.Request.AssetId} not found.");
 
                 var requestObj = _mapper.Map<CreateTransactionRequestDto, Data.Entities.Transaction>(request.Request);
-                
+
                 await _transactionRepository.AddAsync(requestObj);
 
                 return requestObj.Id;

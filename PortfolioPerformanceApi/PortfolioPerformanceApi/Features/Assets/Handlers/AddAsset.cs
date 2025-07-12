@@ -53,7 +53,7 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             /// </returns>
             public async Task<Guid> Handle(AddAssetCommand request, CancellationToken cancellationToken)
             {
-                var asset = await _portfolioRepository.GetByIdAsync(request.Request.PortfolioId)
+                _ = await _portfolioRepository.GetByIdAsync(request.Request.PortfolioId)
                                                 ?? throw new KeyNotFoundException($"Portfolio with ID {request.Request.PortfolioId} not found.");
 
 

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\PortfolioPerformance.Data\PortfolioPerformance.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Assets\DTO\Response\" />
-  </ItemGroup>
-
 </Project>
