@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PortfolioPerformance.Api.Features.Portfolio.DTO.Request;
+using PortfolioPerformance.Api.Features.Portfolio.DTO.Response;
 
 namespace PortfolioPerformance.Api.Features.Portfolio.Profiles
 {
@@ -6,17 +8,16 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Profiles
     {
         public PortfolioProfile()
         {
-            CreateMap<Data.Entities.Portfolio, DTO.Response.GetPortfolioResponse>()
+            CreateMap<Data.Entities.Portfolio, GetPortfolioResponseDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-            CreateMap<Data.Entities.Portfolio, DTO.Response.CreatePortfolioResponse>()
-               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            CreateMap<Data.Entities.Portfolio, CreatePortfolioResponseDto>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-            CreateMap<DTO.Request.CreatePortfolioDto, Data.Entities.Portfolio>()
+            CreateMap<CreatePortfolioRequestDto, Data.Entities.Portfolio>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
         }

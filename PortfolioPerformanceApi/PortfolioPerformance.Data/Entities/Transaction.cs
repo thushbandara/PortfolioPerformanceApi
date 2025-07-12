@@ -1,4 +1,6 @@
-﻿namespace PortfolioPerformance.Data.Entities
+﻿using PortfolioPerformance.Data.Common;
+
+namespace PortfolioPerformance.Data.Entities
 {
     public class Transaction : BaseEntity
     {
@@ -20,7 +22,7 @@
         /// <summary>
         /// Represents the type of transaction, either "Buy" or "Sell".
         /// </summary>
-        public String Type { get; set; } // Buy/Sell
+        public TransactionType Type { get; set; } // Buy/Sell
 
         /// <summary>
         /// Represents the unique identifier for the asset associated with this transaction.

@@ -5,7 +5,7 @@
         /// <summary>
         /// Represents the unique identifier for the asset.
         /// </summary>
-        public string Symbol { get; set; }
+        public string AssetCode { get; set; }
 
         /// <summary>
         /// Represents the name of the asset.

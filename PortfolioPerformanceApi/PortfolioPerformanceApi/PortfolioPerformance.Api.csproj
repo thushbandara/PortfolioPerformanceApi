@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Assets\" />
+    <Folder Include="Features\Assets\DTO\Response\" />
     <Folder Include="Features\Transactions\" />
   </ItemGroup>
 

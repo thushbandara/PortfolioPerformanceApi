@@ -20,17 +20,17 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
             }
         }
 
-        public record GetPortfolioQuery(Guid Id) : IRequest<GetPortfolioResponse>;
+        public record GetPortfolioQuery(Guid Id) : IRequest<GetPortfolioResponseDto>;
 
 
-        public class Handler(IPortfolioPerformanceRepository<Data.Entities.Portfolio> _repository, IEntityMapper _mapper) : IRequestHandler<GetPortfolioQuery, GetPortfolioResponse>
+        public class Handler(IPortfolioPerformanceRepository<Data.Entities.Portfolio> _repository, IEntityMapper _mapper) : IRequestHandler<GetPortfolioQuery, GetPortfolioResponseDto>
         {
-            public async Task<GetPortfolioResponse> Handle(GetPortfolioQuery request, CancellationToken cancellationToken)
+            public async Task<GetPortfolioResponseDto> Handle(GetPortfolioQuery request, CancellationToken cancellationToken)
             {
                 var data = await _repository.GetByIdAsync(request.Id)
                                                     ?? throw new KeyNotFoundException($"Portfolio with ID {request.Id} not found.");
 
-                return _mapper.Map<Data.Entities.Portfolio, GetPortfolioResponse>(data);
+                return _mapper.Map<Data.Entities.Portfolio, GetPortfolioResponseDto>(data);
             }
         }
     }
