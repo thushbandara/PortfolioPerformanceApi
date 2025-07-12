@@ -25,7 +25,7 @@
         /// <summary>
         /// Represents the unique identifier for the asset associated with this transaction.
         /// </summary>
-        public int AssetId { get; set; }
+        public Guid AssetId { get; set; }
 
         /// <summary>
         /// Represents the asset that this transaction is associated with.

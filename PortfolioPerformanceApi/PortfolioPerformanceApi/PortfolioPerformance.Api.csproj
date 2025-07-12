@@ -17,4 +17,10 @@
     <ProjectReference Include="..\PortfolioPerformance.Data\PortfolioPerformance.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Features\Assets\" />
+    <Folder Include="Features\Transactions\" />
+  </ItemGroup>
+
 </Project>

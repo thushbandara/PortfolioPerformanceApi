@@ -8,10 +8,6 @@ namespace PortfolioPerformance.Data.Configuration
     {
         void IEntityTypeConfiguration<T>.Configure(EntityTypeBuilder<T> builder)
         {
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Property(p => p.CreatedBy).ValueGeneratedOnAdd();
-            builder.Property(p => p.CreatedDate).ValueGeneratedOnAdd();
-
             Configure(builder);
         }
 

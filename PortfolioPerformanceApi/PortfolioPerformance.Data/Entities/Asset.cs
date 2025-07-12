@@ -15,7 +15,7 @@
         /// <summary>
         /// Represents the unique identifier for the portfolio to which this asset belongs.
         /// </summary>
-        public int PortfolioId { get; set; }
+        public Guid PortfolioId { get; set; }
 
         /// <summary>
         /// Represents the portfolio that contains this asset.

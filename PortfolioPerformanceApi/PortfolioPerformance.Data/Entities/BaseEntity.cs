@@ -5,17 +5,17 @@
         /// <summary>
         /// Represents the unique identifier for the entity.
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary>
         /// Represents the user who created the entity.
         /// </summary>
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = "System";
 
         /// <summary>
         /// Represents the date when the entity was created.
         /// </summary>
-        public DateOnly CreatedDate { get; set; }
+        public DateOnly CreatedDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
 
         /// <summary>
         /// Represents the user who last updated the entity.
