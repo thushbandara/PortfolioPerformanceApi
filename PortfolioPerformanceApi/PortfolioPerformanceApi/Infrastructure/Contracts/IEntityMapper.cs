@@ -1,4 +1,4 @@
-﻿namespace PortfolioPerformance.Data.Contracts
+﻿namespace PortfolioPerformance.Api.Infrastructure.Contracts
 {
     public interface IEntityMapper
     {

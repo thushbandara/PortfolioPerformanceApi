@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using PortfolioPerformance.Api.Infrastructure.Common;
+using PortfolioPerformance.Api.Infrastructure.Contracts;
 using PortfolioPerformance.Data;
-using PortfolioPerformance.Data.Common;
 using PortfolioPerformance.Data.Contracts;
 using PortfolioPerformance.Data.Repositories;
 using System.Reflection;

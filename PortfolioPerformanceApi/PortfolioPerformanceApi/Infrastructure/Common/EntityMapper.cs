@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using PortfolioPerformance.Data.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Contracts;
 using System.Reflection;
 
-namespace PortfolioPerformance.Data.Common
+namespace PortfolioPerformance.Api.Infrastructure.Common
 {
     public class EntityMapper : IEntityMapper
     {
@@ -14,6 +14,8 @@ namespace PortfolioPerformance.Data.Common
             {
                 cfg.AddMaps(Assembly.GetExecutingAssembly());
             });
+
+            _mapper = config.CreateMapper();
         }
 
         public TDestination Map<TSource, TDestination>(TSource source)
