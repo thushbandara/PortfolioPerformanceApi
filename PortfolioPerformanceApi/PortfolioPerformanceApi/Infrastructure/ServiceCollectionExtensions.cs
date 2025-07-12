@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using PortfolioPerformance.Data;
+using PortfolioPerformance.Data.Common;
 using PortfolioPerformance.Data.Contracts;
 using PortfolioPerformance.Data.Repositories;
 using System.Reflection;
@@ -13,7 +15,8 @@ namespace PortfolioPerformance.Api.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddDbContext<PortfolioPerformanceContext>(opt => opt.UseInMemoryDatabase("PortfolioDb"));
             services.AddScoped(typeof(IPortfolioPerformanceRepository<>), typeof(PortfolioPerformanceRepository<>));
-
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddScoped<IEntityMapper, EntityMapper>();
             return services;
         }
     }
