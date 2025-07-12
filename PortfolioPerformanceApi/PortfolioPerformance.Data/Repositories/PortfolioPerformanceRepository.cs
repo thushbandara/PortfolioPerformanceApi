@@ -24,7 +24,9 @@ namespace PortfolioPerformance.Data.Repositories
 
         public async Task<TEntity?> GetByIdAsync(Guid id)
         {
-            return await context.Set<TEntity>().FindAsync(id);
+            return await context.Set<TEntity>()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
         }
 
         public async Task Remove(TEntity entity)

@@ -20,6 +20,11 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Profiles
             CreateMap<CreatePortfolioRequestDto, Data.Entities.Portfolio>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
+            CreateMap<UpdatePortfolioRequestDto, Data.Entities.Portfolio>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+            
         }
     }
 }
