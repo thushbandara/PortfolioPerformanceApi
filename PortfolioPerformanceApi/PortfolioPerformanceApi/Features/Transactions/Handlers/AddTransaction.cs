@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PortfolioPerformance.Api.Features.Transactions.DTO;
+using PortfolioPerformance.Api.Features.Transactions.DTO.Request;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
 using PortfolioPerformance.Data.Contracts;
 
@@ -39,7 +39,9 @@ namespace PortfolioPerformance.Api.Features.Transactions.Handlers
         /// <summary>
         /// Handler for creating a transaction.
         /// </summary>
-        public class Handler(IPortfolioPerformanceRepository<Data.Entities.Transaction> _repository, IEntityMapper _mapper) : IRequestHandler<CreateTransactionCommand, Guid>
+        public class Handler(IPortfolioPerformanceRepository<Data.Entities.Transaction> _transactionRepository,
+            IPortfolioPerformanceRepository<Data.Entities.Asset> _assetRepository,
+            IEntityMapper _mapper) : IRequestHandler<CreateTransactionCommand, Guid>
         {
             /// <summary>
             /// Handles a request
@@ -51,9 +53,12 @@ namespace PortfolioPerformance.Api.Features.Transactions.Handlers
             /// </returns>
             public async Task<Guid> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
             {
-                var requestObj = _mapper.Map<CreateTransactionRequestDto, Data.Entities.Transaction>(request.Request);
+                var data = await _assetRepository.GetByIdAsync(request.Request.AssetId)
+                                               ?? throw new KeyNotFoundException($"Asset with ID {request.Request.AssetId} not found.");
 
-                await _repository.AddAsync(requestObj);
+                var requestObj = _mapper.Map<CreateTransactionRequestDto, Data.Entities.Transaction>(request.Request);
+                
+                await _transactionRepository.AddAsync(requestObj);
 
                 return requestObj.Id;
             }

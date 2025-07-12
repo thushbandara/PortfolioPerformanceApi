@@ -6,6 +6,8 @@ namespace PortfolioPerformance.Data.Repositories
 {
     public class PortfolioPerformanceRepository<TEntity>(PortfolioPerformanceContext context) : IPortfolioPerformanceRepository<TEntity> where TEntity : class
     {
+         private readonly DbSet<TEntity> _set = context.Set<TEntity>();
+
         public async Task AddAsync(TEntity entity)
         {
             context.Add(entity);
@@ -27,6 +29,18 @@ namespace PortfolioPerformance.Data.Repositories
             return await context.Set<TEntity>()
                         .AsNoTracking()
                         .FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
+        }
+
+        public async Task<TEntity?> GetByIdAsync(Guid id, params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _set.AsNoTracking();
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
         }
 
         public async Task Remove(TEntity entity)

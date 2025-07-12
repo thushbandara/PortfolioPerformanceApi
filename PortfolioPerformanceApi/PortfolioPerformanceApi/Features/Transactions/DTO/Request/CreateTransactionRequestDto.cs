@@ -1,4 +1,4 @@
-﻿namespace PortfolioPerformance.Api.Features.Transactions.DTO
+﻿namespace PortfolioPerformance.Api.Features.Transactions.DTO.Request
 {
     /// <summary>
     /// Data Transfer Object for creating a transaction request.
