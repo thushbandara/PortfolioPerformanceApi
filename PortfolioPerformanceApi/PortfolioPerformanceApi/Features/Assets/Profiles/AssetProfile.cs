@@ -4,8 +4,14 @@ using PortfolioPerformance.Data.Common;
 
 namespace PortfolioPerformance.Api.Features.Assets.Profiles
 {
+    /// <summary>
+    /// AutoMapper profile for mapping asset-related DTOs to entity models and vice versa.
+    /// </summary>
     public class AssetProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of the class.
+        /// </summary>
         public AssetProfile()
         {
             CreateMap<AddAssetsRequestDto, Data.Entities.Asset>()

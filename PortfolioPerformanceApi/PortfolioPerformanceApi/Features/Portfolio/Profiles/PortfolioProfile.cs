@@ -4,8 +4,15 @@ using PortfolioPerformance.Api.Features.Portfolio.DTO.Response;
 
 namespace PortfolioPerformance.Api.Features.Portfolio.Profiles
 {
+    /// <summary>
+    /// AutoMapper profile for mapping portfolio-related DTOs to entity models and vice versa.
+    /// </summary>
+    /// <seealso cref="AutoMapper.Profile" />
     public class PortfolioProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of the class.
+        /// </summary>
         public PortfolioProfile()
         {
             CreateMap<Data.Entities.Portfolio, GetPortfolioResponseDto>()
