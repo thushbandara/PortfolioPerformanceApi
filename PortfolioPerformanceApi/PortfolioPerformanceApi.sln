@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioPerformanceApi", "PortfolioPerformanceApi\PortfolioPerformanceApi.csproj", "{E3AFF51D-56D1-4F1D-A23A-926BE74B8B12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioPerformance.Api", "PortfolioPerformanceApi\PortfolioPerformance.Api.csproj", "{E3AFF51D-56D1-4F1D-A23A-926BE74B8B12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
