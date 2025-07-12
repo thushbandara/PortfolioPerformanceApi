@@ -11,7 +11,7 @@
         /// <value>
         /// The total value.
         /// </value>
-        public decimal TotalValue { get; set; }
+        public decimal Total { get; set; }
         /// <summary>
         /// Gets or sets the asset allocations.
         /// </summary>

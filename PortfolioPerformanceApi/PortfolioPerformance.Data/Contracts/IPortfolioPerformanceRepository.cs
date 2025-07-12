@@ -17,7 +17,7 @@ namespace PortfolioPerformance.Data.Contracts
         /// <param name="id">The identifier.</param>
         /// <param name="includes">The includes.</param>
         /// <returns>The entity if found; otherwise, null.</returns>
-        Task<TEntity?> GetByIdAsync(Guid id, params Expression<Func<TEntity, object>>[] includes)
+        Task<TEntity?> GetByIdAsync(Guid id, params Expression<Func<TEntity, object>>[] includes);
 
         /// <summary>
         /// Retrieves all entities of type TEntity.

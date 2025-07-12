@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using PortfolioPerformance.Api.Features.Portfolio.DTO.Response;
+using PortfolioPerformance.Api.Features.Portfolio.Repositories;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
 using PortfolioPerformance.Data.Common;
-using PortfolioPerformance.Data.Contracts;
 
 namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
 {
@@ -39,7 +39,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
         /// <summary>
         /// Handler for getting the performance of a portfolio.
         /// </summary>
-        public class Handler(IPortfolioPerformanceRepository<Data.Entities.Portfolio> _repository) : IRequestHandler<GetPortfolioPerformanceQuery, GetPortfolioPerformanceResponseDto>
+        public class Handler(IPortfolioRepository _repository) : IRequestHandler<GetPortfolioPerformanceQuery, GetPortfolioPerformanceResponseDto>
         {
             /// <summary>
             /// Handles a request
@@ -58,18 +58,18 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                 var realizedGains = 0m;
                 var unrealizedGains = 0m;
                 var allocations = new Dictionary<string, decimal>();
-                var sss = nameof(TransactionType.Buy);
+
                 foreach (var asset in portfolio.Assets)
                 {
-                    var relevantTxns = asset.Transactions.Where(t => t.Date >= request.From && t.Date <= request.To).ToList();
-                    var buys = relevantTxns.Where(t => t.Type == nameof(TransactionType.Buy)).ToList();
-                    var sells = relevantTxns.Where(t => t.Type == nameof(TransactionType.Sell)).ToList();
+                    var transactions = asset.Transactions.Where(t => t.Date >= request.From && t.Date <= request.To).ToList();
+                    var buys = transactions.Where(t => t.Type == nameof(TransactionType.Buy)).ToList();
+                    var sells = transactions.Where(t => t.Type == nameof(TransactionType.Sell)).ToList();
 
                     var totalBuyQty = buys.Sum(b => b.Quantity);
                     var totalSellQty = sells.Sum(s => s.Quantity);
                     var netQty = totalBuyQty - totalSellQty;
                     var avgBuyPrice = totalBuyQty > 0 ? buys.Sum(b => b.Quantity * b.Price) / totalBuyQty : 0m;
-                    var latestPrice = relevantTxns.OrderByDescending(t => t.Date).FirstOrDefault()?.Price ?? 0m;
+                    var latestPrice = transactions.OrderByDescending(t => t.Date).FirstOrDefault()?.Price ?? 0m;
 
                     var assetValue = netQty * latestPrice;
                     totalValue += assetValue;
@@ -81,7 +81,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
 
                 return new GetPortfolioPerformanceResponseDto
                 {
-                    TotalValue = totalValue,
+                    Total = totalValue,
                     AssetAllocations = [.. allocations.Select(a => new AssetAllocationDto
                     {
                         AssetCode = a.Key,
@@ -92,6 +92,5 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                 };
             }
         }
-
     }
 }
