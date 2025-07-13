@@ -7,17 +7,16 @@ namespace PortfolioPerformance.Api.Infrastructure.Common
     /// <summary>
     /// EntityMapper is a class that implements the IEntityMapper interface.
     /// </summary>
-    /// <seealso cref="PortfolioPerformance.Api.Infrastructure.Contracts.IEntityMapper" />
 
     public class EntityMapper : IEntityMapper
     {
         /// <summary>
         /// The mapper
         /// </summary>
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EntityMapper" /> class.
+        /// Initializes a new instance of the class.
         /// </summary>
         public EntityMapper()
         {
