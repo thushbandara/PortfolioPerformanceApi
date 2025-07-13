@@ -24,12 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Portfolio\Validators\" />
-    <Folder Include="Features\Transactions\Handlers\" />
-    <Folder Include="Features\Transactions\Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PortfolioPerformance.Data\PortfolioPerformance.Data.csproj" />
     <ProjectReference Include="..\PortfolioPerformanceApi\PortfolioPerformance.Api.csproj" />
   </ItemGroup>
