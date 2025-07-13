@@ -6,79 +6,75 @@ using PortfolioPerformance.Data.Common;
 
 namespace PortfolioPerformance.Api.Test.Features.Assets.Validators
 {
-    public class AddAssetsRequestValidatorTests
+    public class UpdateAssetsRequestValidatorTests
     {
-        private readonly AddAssetsRequestValidator _validator = new();
+        private readonly UpdateAssetsRequestValidator _validator = new();
 
         [Fact]
-        public void Should_Have_Error_When_AssetCode_Is_Null()
+        public void Should_Throw_When_AssetCode_Is_Null()
         {
-            var model = new AddAssetsRequestDto
+            var model = new UpdateAssetsRequestDto
             {
                 AssetCode = null,
-                PortfolioId = Guid.NewGuid(),
                 Type = AssetType.Stock.ToString()
             };
 
             Action act = () => _validator.Validate(model);
 
-            // Assert
             var exception = act.Should().Throw<ValidationException>().Which;
 
-            exception.Errors.Should()
-                .Contain(e => e.PropertyName == "AssetCode" && e.ErrorMessage == "Asset code type is required.");
-
+            exception.Errors.Should().Contain(e =>
+                e.PropertyName == "AssetCode" &&
+                e.ErrorMessage == "Asset code type is required.");
         }
 
         [Fact]
-        public void Should_Have_Error_When_PortfolioId_Is_Empty()
+        public void Should_Throw_When_Type_Is_Null()
         {
-            var model = new AddAssetsRequestDto
+            var model = new UpdateAssetsRequestDto
             {
                 AssetCode = "AAPL",
-                PortfolioId = Guid.Empty,
-                Type = AssetType.Stock.ToString()
+                Type = null
             };
 
             Action act = () => _validator.Validate(model);
 
-            // Assert
             var exception = act.Should().Throw<ValidationException>().Which;
 
-            exception.Errors.Should()
-                .Contain(e => e.PropertyName == "PortfolioId" && e.ErrorMessage == "Invalid portfolio id format");
+            exception.Errors.Should().Contain(e =>
+                e.PropertyName == "Type" &&
+                e.ErrorMessage == "Asset type id is required.");
         }
 
         [Fact]
-        public void Should_Have_Error_When_Type_Is_Invalid()
+        public void Should_Throw_When_Type_Is_Invalid()
         {
-            var model = new AddAssetsRequestDto
+            var model = new UpdateAssetsRequestDto
             {
                 AssetCode = "AAPL",
-                PortfolioId = Guid.NewGuid(),
                 Type = "InvalidType"
             };
 
             Action act = () => _validator.Validate(model);
 
-            // Assert
             var exception = act.Should().Throw<ValidationException>().Which;
 
-            exception.Errors.Should()
-                .Contain(e => e.PropertyName == "Type" && e.ErrorMessage == "Asset type should be one of (Stock/Bond/Crypto)");
+            exception.Errors.Should().Contain(e =>
+                e.PropertyName == "Type" &&
+                e.ErrorMessage == "Asset type should be one of (Stock/Bond/Crypto)");
         }
 
         [Fact]
-        public void Should_Not_Have_Error_For_Valid_Model()
+        public void Should_Not_Throw_When_Model_Is_Valid()
         {
-            var model = new AddAssetsRequestDto
+            var model = new UpdateAssetsRequestDto
             {
                 AssetCode = "AAPL",
-                PortfolioId = Guid.NewGuid(),
                 Type = AssetType.Stock.ToString()
             };
 
             var result = _validator.Validate(model);
+
             result.IsValid.Should().BeTrue();
         }
     }

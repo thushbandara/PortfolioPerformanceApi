@@ -15,7 +15,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
         {
             // Arrange
             var assetRepo = Substitute.For<IPortfolioPerformanceRepository<Asset>>();
-            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Portfolio>>();
+            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Data.Entities.Portfolio>>();
             var mapper = Substitute.For<IEntityMapper>();
 
             var portfolioId = Guid.NewGuid();
@@ -27,7 +27,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
                 AssetCode = "AAPL",
             };
 
-            var portfolioEntity = new Portfolio
+            var portfolioEntity = new Data.Entities.Portfolio
             {
                 Id = portfolioId
             };
@@ -57,7 +57,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
         {
             // Arrange
             var assetRepo = Substitute.For<IPortfolioPerformanceRepository<Asset>>();
-            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Portfolio>>();
+            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Data.Entities.Portfolio>>();
             var mapper = Substitute.For<IEntityMapper>();
 
             var missingPortfolioId = Guid.NewGuid();
@@ -69,7 +69,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
                 AssetCode = "AAPL",
             };
 
-            portfolioRepo.GetByIdAsync(Arg.Any<Guid>()).Returns((Portfolio?)null);
+            portfolioRepo.GetByIdAsync(Arg.Any<Guid>()).Returns((Data.Entities.Portfolio?)null);
             var sut = new AddAsset.Handler(assetRepo, portfolioRepo, mapper);
 
             // Act

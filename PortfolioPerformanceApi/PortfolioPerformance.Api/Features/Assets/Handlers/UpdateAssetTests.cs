@@ -15,7 +15,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
         {
             // Arrange
             var assetRepo = Substitute.For<IPortfolioPerformanceRepository<Asset>>();
-            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Portfolio>>();
+            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Data.Entities.Portfolio>>();
             var mapper = Substitute.For<IEntityMapper>();
             var assetId = Guid.NewGuid();
             var dto = new UpdateAssetsRequestDto
@@ -54,7 +54,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
         {
             // Arrange
             var assetRepo = Substitute.For<IPortfolioPerformanceRepository<Asset>>();
-            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Portfolio>>();
+            var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Data.Entities.Portfolio>>();
             var mapper = Substitute.For<IEntityMapper>();
             var missingId = Guid.NewGuid();
             var dto = new UpdateAssetsRequestDto
