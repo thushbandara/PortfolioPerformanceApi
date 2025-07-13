@@ -16,7 +16,8 @@ namespace PortfolioPerformance.Api.Features.Transactions.Validators
         public CreateTransactionRequestValidator()
         {
             RuleFor(x => x.AssetId)
-                .NotNull().WithMessage("Asset id is required.");
+                .NotNull().WithMessage("Asset id is required.")
+                .Must(x => x != Guid.Empty).WithMessage("Invalid asset id format");
 
             RuleFor(x => x.Price)
                 .NotNull().WithMessage("Price is required.")

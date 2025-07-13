@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6615543A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioPerformance.Data", "PortfolioPerformance.Data\PortfolioPerformance.Data.csproj", "{E9037FCD-8FB2-41F9-9080-E09920CC34CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioPerformance.Api", "PortfolioPerformance.Api\PortfolioPerformance.Api.csproj", "{99613986-B3D4-4A6C-B846-11E5FA49B422}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioPerformance.Api.Test", "PortfolioPerformance.Api\PortfolioPerformance.Api.Test.csproj", "{99613986-B3D4-4A6C-B846-11E5FA49B422}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,7 +19,8 @@ namespace PortfolioPerformance.Api.Features.Assets.Validators
                 .NotNull().WithMessage("Asset code type is required.");
 
             RuleFor(x => x.PortfolioId)
-                .NotNull().WithMessage("Portfolio id is required.");
+                .NotNull().WithMessage("Portfolio id is required.")
+                .Must(x => x != Guid.Empty).WithMessage("Invalid portfolio id format");
 
             RuleFor(x => x.Type)
               .NotNull().WithMessage("Asset type id is required.")
