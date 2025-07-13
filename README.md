@@ -16,7 +16,6 @@ This API allows users to manage investment portfolios, track asset transactions,
 ### Prerequisites
 
 * [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download)
-* SQL Server or PostgreSQL (if database is used)
 * [Postman](https://www.postman.com/downloads/) (for API testing)
 
 ### Run the Application
