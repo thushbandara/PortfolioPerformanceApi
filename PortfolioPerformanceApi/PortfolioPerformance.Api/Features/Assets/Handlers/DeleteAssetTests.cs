@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using PortfolioPerformance.Api.Features.Assets.Handlers;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Data.Contracts;
 using PortfolioPerformance.Data.Entities;
 
@@ -43,7 +44,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
             Func<Task> act = () => sut.Handle(new DeleteAsset.DeleteAssetCommand(missingId), default);
 
             // Assert
-            var ex = await act.Should().ThrowAsync<KeyNotFoundException>();
+            var ex = await act.Should().ThrowAsync<RecordNotFoundException>();
             ex.And.Message.Should().Contain(missingId.ToString());
 
             await assetRepo.DidNotReceive().Remove(Arg.Any<Asset>());

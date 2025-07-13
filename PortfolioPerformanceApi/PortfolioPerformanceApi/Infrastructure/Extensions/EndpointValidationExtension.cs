@@ -5,7 +5,7 @@ namespace PortfolioPerformance.Api.Infrastructure.Extensions
     /// <summary>
     /// Extension methods for endpoint validation.
     /// </summary>
-    public static class EndpointValidationExtensions
+    public static class EndpointValidationExtension
     {
         /// <summary>
         /// Withes the validation.

@@ -3,6 +3,7 @@ using NSubstitute;
 using PortfolioPerformance.Api.Features.Assets.DTO.Request;
 using PortfolioPerformance.Api.Features.Assets.Handlers;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Data.Contracts;
 using PortfolioPerformance.Data.Entities;
 
@@ -68,7 +69,7 @@ namespace PortfolioPerformance.Api.Test.Features.Assets.Handlers
             Func<Task> act = () => sut.Handle(new UpdateAsset.UpdateAssetCommand(missingId, dto), default);
 
             // Assert
-            var ex = await act.Should().ThrowAsync<KeyNotFoundException>();
+            var ex = await act.Should().ThrowAsync<RecordNotFoundException>();
             ex.And.Message.Should().Contain(missingId.ToString());
 
             await assetRepo.DidNotReceive().Update(Arg.Any<Asset>());

@@ -1,6 +1,7 @@
 
 using PortfolioPerformance.Api.Infrastructure;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Middleware;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,9 +34,11 @@ app.UseCors(policy =>
 });
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
 app.UseEndpoints(endpoints =>
 {
-    // Discover and register all IEndpoint implementations dynamically
     var endpointTypes = AppDomain.CurrentDomain.GetAssemblies()
         .SelectMany(assembly => assembly.GetTypes())
         .Where(type => typeof(IEndpoint).IsAssignableFrom(type) && type is { IsInterface: false, IsAbstract: false });

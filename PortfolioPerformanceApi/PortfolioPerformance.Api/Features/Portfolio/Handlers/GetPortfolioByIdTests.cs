@@ -3,6 +3,7 @@ using NSubstitute;
 using PortfolioPerformance.Api.Features.Portfolio.DTO.Response;
 using PortfolioPerformance.Api.Features.Portfolio.Handlers;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Data.Contracts;
 
 namespace PortfolioPerformance.Api.Test.Features.Portfolio.Handlers
@@ -41,7 +42,7 @@ namespace PortfolioPerformance.Api.Test.Features.Portfolio.Handlers
         }
 
         [Fact]
-        public async Task Handle_WhenPortfolioNotFound_ThrowsKeyNotFoundException()
+        public async Task Handle_WhenPortfolioNotFound_ThrowsRecordNotFoundException()
         {
             // Arrange
             var portfolioRepo = Substitute.For<IPortfolioPerformanceRepository<Data.Entities.Portfolio>>();
@@ -54,7 +55,7 @@ namespace PortfolioPerformance.Api.Test.Features.Portfolio.Handlers
             Func<Task> act = () => sut.Handle(new GetPortfolioById.GetPortfolioQuery(missingId), default);
 
             // Assert
-            var ex = await act.Should().ThrowAsync<KeyNotFoundException>();
+            var ex = await act.Should().ThrowAsync<RecordNotFoundException>();
             ex.And.Message.Should().Contain(missingId.ToString());
 
             await portfolioRepo.Received(1).GetByIdAsync(missingId);

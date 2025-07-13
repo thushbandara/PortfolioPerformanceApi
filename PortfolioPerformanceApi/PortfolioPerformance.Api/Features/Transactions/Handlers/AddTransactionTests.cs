@@ -3,6 +3,7 @@ using NSubstitute;
 using PortfolioPerformance.Api.Features.Transactions.DTO.Request;
 using PortfolioPerformance.Api.Features.Transactions.Handlers;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Data.Contracts;
 
 namespace PortfolioPerformance.Api.Test.Features.Transactions.Handlers
@@ -44,7 +45,7 @@ namespace PortfolioPerformance.Api.Test.Features.Transactions.Handlers
         }
 
         [Fact]
-        public async Task Handle_WhenAssetMissing_ThrowsKeyNotFoundException()
+        public async Task Handle_WhenAssetMissing_ThrowsRecordNotFoundException()
         {
             // Arrange
             var transactionRepo = Substitute.For<IPortfolioPerformanceRepository<Data.Entities.Transaction>>();
@@ -67,7 +68,7 @@ namespace PortfolioPerformance.Api.Test.Features.Transactions.Handlers
             Func<Task> act = () => sut.Handle(new AddTransaction.CreateTransactionCommand(dto), default);
 
             // Assert
-            var ex = await act.Should().ThrowAsync<KeyNotFoundException>();
+            var ex = await act.Should().ThrowAsync<RecordNotFoundException>();
             ex.And.Message.Should().Contain(missingId.ToString());
 
             await transactionRepo.DidNotReceive().AddAsync(Arg.Any<Data.Entities.Transaction>());

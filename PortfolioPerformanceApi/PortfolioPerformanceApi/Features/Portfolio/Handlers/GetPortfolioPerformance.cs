@@ -2,6 +2,7 @@
 using PortfolioPerformance.Api.Features.Portfolio.DTO.Response;
 using PortfolioPerformance.Api.Features.Portfolio.Repositories;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Data.Common;
 
 namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
@@ -52,7 +53,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
             public async Task<GetPortfolioPerformanceResponseDto> Handle(GetPortfolioPerformanceQuery request, CancellationToken cancellationToken)
             {
                 var portfolio = await _repository.GetByIdAsync(request.PortfolioId)
-                                                    ?? throw new KeyNotFoundException($"Portfolio with ID {request.PortfolioId} not found.");
+                                                    ?? throw new RecordNotFoundException($"Portfolio with Id {request.PortfolioId} not found.");
 
                 var totalValue = 0m;
                 var realizedGains = 0m;

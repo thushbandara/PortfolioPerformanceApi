@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Data.Contracts;
 
 namespace PortfolioPerformance.Api.Features.Assets.Handlers
@@ -51,7 +52,7 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             public async Task<Guid> Handle(DeleteAssetCommand request, CancellationToken cancellationToken)
             {
                 var asset = await _assetRepository.GetByIdAsync(request.Id)
-                                                ?? throw new KeyNotFoundException($"Asset with ID {request.Id} not found.");
+                                                ?? throw new RecordNotFoundException($"Asset with Id {request.Id} not found.");
 
                 await _assetRepository.Remove(asset);
 

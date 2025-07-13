@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using PortfolioPerformance.Api.Features.Assets.DTO.Request;
 using PortfolioPerformance.Api.Features.Transactions.DTO.Request;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Api.Infrastructure.Extensions;
 using PortfolioPerformance.Data.Contracts;
 
@@ -57,7 +57,7 @@ namespace PortfolioPerformance.Api.Features.Transactions.Handlers
             public async Task<Guid> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
             {
                 _ = await _assetRepository.GetByIdAsync(request.Request.AssetId)
-                                               ?? throw new KeyNotFoundException($"Asset with ID {request.Request.AssetId} not found.");
+                                               ?? throw new RecordNotFoundException($"Asset with Id {request.Request.AssetId} not found.");
 
                 var requestObj = _mapper.Map<CreateTransactionRequestDto, Data.Entities.Transaction>(request.Request);
 

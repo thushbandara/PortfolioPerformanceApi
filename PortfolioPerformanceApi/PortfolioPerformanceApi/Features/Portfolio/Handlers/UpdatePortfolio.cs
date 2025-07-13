@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PortfolioPerformance.Api.Features.Portfolio.DTO.Request;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Exceptions;
 using PortfolioPerformance.Api.Infrastructure.Extensions;
 using PortfolioPerformance.Data.Contracts;
 
@@ -54,7 +55,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
             public async Task<Guid> Handle(UpdatePortfolioCommand request, CancellationToken cancellationToken)
             {
                 var data = await _repository.GetByIdAsync(request.Id)
-                                                 ?? throw new KeyNotFoundException($"Portfolio with ID {request.Id} not found.");
+                                                 ?? throw new RecordNotFoundException($"Portfolio with Id {request.Id} not found.");
 
 
                 var requestObj = _mapper.Map<UpdatePortfolioRequestDto, Data.Entities.Portfolio>(request.Request);
