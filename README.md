@@ -47,7 +47,7 @@ The API will be hosted at: `https://localhost:7069/`.
 
 ## 📦 Postman Collection
 
-1. Import the file: `PortfolioPerformance.postman_collection_fixed.json` into Postman.
+1. Import the file: `Postman Scripts.json` into Postman.
 2. Set the environment variable `{{baseUrl}}` to match your running API base URL:
 
    * Example: `https://localhost:7069/`
