@@ -21,7 +21,7 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             /// <param name="app">The application.</param>
             public void Configure(IEndpointRouteBuilder app)
             {
-                app.MapDelete("/api/asset{id}", async (Guid id, ISender _sender) =>
+                app.MapDelete("/api/asset/{id}", async (Guid id, ISender _sender) =>
                 {
                     return Results.Ok(await _sender.Send(new DeleteAssetCommand(id)));
                 })

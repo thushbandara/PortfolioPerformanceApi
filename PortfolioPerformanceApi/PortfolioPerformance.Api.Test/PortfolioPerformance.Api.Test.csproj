@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PortfolioPerformance.Api\PortfolioPerformance.Api.csproj" />
     <ProjectReference Include="..\PortfolioPerformance.Data\PortfolioPerformance.Data.csproj" />
-    <ProjectReference Include="..\PortfolioPerformanceApi\PortfolioPerformance.Api.csproj" />
   </ItemGroup>
 
 </Project>

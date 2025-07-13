@@ -1,0 +1,273 @@
+{
+  "info": {
+    "name": "PortfolioPerformance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create a new asset",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/asset",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "asset"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "description": "Adds a new asset to an existing portfolio. Requires details such as asset code, type, and associated portfolio Id. Returns the newly created asset Id.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"portfolioId\": \"<portfolioId>\",\n  \"assetCode\": \"<assetCode>\",\n  \"type\": \"<type>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete an asset by Id",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/asset/{id}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "asset",
+            "{id}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "<id>"
+            }
+          ]
+        },
+        "description": "Deletes an existing asset from the portfolio by its Id. Returns the deleted asset Id upon success."
+      }
+    },
+    {
+      "name": "Update an asset by Id",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/asset/{id}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "asset",
+            "{id}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "<id>"
+            }
+          ]
+        },
+        "description": "Updates the details of an existing asset in the system by its Id. Returns the updated asset Id upon success.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"assetCode\": \"<assetCode>\",\n  \"type\": \"<type>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create a new portfolio",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/portfolio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "portfolio"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "description": "Creates a new portfolio in the system. Requires a portfolio name and returns the Id of the newly created portfolio.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"<name>\",\n  \"description\": \"<description>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get portfolio by Id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/portfolio/{id}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "portfolio",
+            "{id}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "<id>"
+            }
+          ]
+        },
+        "description": "Retrieves a portfolio's details from the system by its id. Returns portfolio information including name, assets."
+      }
+    },
+    {
+      "name": "Update an existing portfolio",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/portfolio/{id}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "portfolio",
+            "{id}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "<id>"
+            }
+          ]
+        },
+        "description": "Updates the details of an existing portfolio by its Id. Accepts changes such as portfolio name and other metadata. Returns the updated portfolio Id.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"<name>\",\n  \"description\": \"<description>\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get portfolio performance",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/portfolio_perfomance",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "portfolio_perfomance"
+          ],
+          "query": [
+            {
+              "key": "portfolioId",
+              "value": "<portfolioId>"
+            },
+            {
+              "key": "from",
+              "value": "<from>"
+            },
+            {
+              "key": "to",
+              "value": "<to>"
+            }
+          ],
+          "variable": []
+        },
+        "description": "Retrieves the performance of a specific portfolio within the given date range. Returns total value, asset allocations, realized gains, and unrealized gains."
+      }
+    },
+    {
+      "name": "Create a new transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/transaction",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transaction"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "description": "Creates a new transaction for a specific asset. The transaction can be of type 'Buy' or 'Sell' and must include asset ID, quantity, price, and date. Returns the Id of the newly created transaction.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"assetId\": \"<assetId>\",\n  \"quantity\": \"<quantity>\",\n  \"price\": \"<price>\",\n  \"type\": \"<type>\"\n}"
+        }
+      }
+    }
+  ]
+}

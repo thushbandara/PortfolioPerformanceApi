@@ -1,0 +1,74 @@
+//Create Portfolio
+
+URL - https://localhost:7069/api/portfolio
+BODY
+{
+  "name": "My Portfolio",
+  "description": "Investment portfolio"
+}
+
+=====================================================================
+
+//Get Portfolio By Id
+URL - https://localhost:7069/api/portfolio/{id}
+PARAM - <portfolioId>
+
+=====================================================================
+
+//Update an existing portfolio
+URL - https://localhost:7069/api/portfolio/{id}
+PARAM - <portfolioId>
+BODY
+{
+  "name": "My Portfolio",
+  "description": "Investment portfolio"
+}
+
+=====================================================================
+
+//Get portfolio performance
+URL - https://localhost:7069/api/portfolio_perfomance?portfolioId=<portfolioId>&from=<from>&to=<to>
+
+
+=====================================================================
+
+//Create a new asset
+URL - https://localhost:7069/api/asset
+BODY
+{
+  "portfolioId": "<portfolioId>",
+  "assetCode": "APPL",
+  "type": "Stock"
+}
+
+=====================================================================
+
+//Delete an asset by Id
+URL - https://localhost:7069/api/asset/{id}
+PARAM - <assetId>
+
+=====================================================================
+
+//Update an asset by Id
+URL - https://localhost:7069/api/asset/{id}
+PARAM - <assetId>
+BODY
+{
+  "assetCode": "APPL",
+  "type": "Stock"
+}
+
+=====================================================================
+
+//Create a new transaction
+URL - https://localhost:7069/api/transaction
+BODY
+{
+  "assetId": "<assetId>",
+  "quantity": "1000",
+  "price": "10.00",
+  "type": "Buy"
+}
+
+
+

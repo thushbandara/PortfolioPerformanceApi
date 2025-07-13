@@ -22,7 +22,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
             /// <param name="app">The application.</param>
             public void Configure(IEndpointRouteBuilder app)
             {
-                app.MapGet("/api/portfolio{id}", async (Guid id, ISender _sender) =>
+                app.MapGet("/api/portfolio/{id}", async (Guid id, ISender _sender) =>
                 {
                     return Results.Ok(await _sender.Send(new GetPortfolioQuery(id)));
                 })

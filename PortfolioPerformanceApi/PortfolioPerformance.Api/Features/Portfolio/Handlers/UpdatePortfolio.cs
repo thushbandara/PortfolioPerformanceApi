@@ -23,7 +23,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
             /// <param name="app">The application.</param>
             public void Configure(IEndpointRouteBuilder app)
             {
-                app.MapPatch("/api/portfolio{id}", async (Guid id, UpdatePortfolioRequestDto request, ISender _sender) =>
+                app.MapPatch("/api/portfolio/{id}", async (Guid id, UpdatePortfolioRequestDto request, ISender _sender) =>
                 {
                     return Results.Ok(await _sender.Send(new UpdatePortfolioCommand(id, request)));
                 })

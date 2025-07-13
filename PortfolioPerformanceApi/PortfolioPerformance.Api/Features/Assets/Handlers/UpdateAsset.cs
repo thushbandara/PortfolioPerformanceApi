@@ -22,7 +22,7 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
             /// <param name="app">The application.</param>
             public void Configure(IEndpointRouteBuilder app)
             {
-                app.MapPatch("/api/asset{id}", async (Guid id, UpdateAssetsRequestDto request, ISender _sender) =>
+                app.MapPatch("/api/asset/{id}", async (Guid id, UpdateAssetsRequestDto request, ISender _sender) =>
                 {
                     return Results.Ok(await _sender.Send(new UpdateAssetCommand(id, request)));
                 })
