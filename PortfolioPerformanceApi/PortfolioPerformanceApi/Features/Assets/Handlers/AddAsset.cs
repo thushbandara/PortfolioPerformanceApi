@@ -28,6 +28,11 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
                     return Results.Ok(await _sender.Send(new AddAssetCommand(request)));
                 })
                 .WithValidation<AddAssetsRequestDto>()
+                .WithOpenApi(operation => new(operation)
+                {
+                    Summary = "Create a new asset",
+                    Description = "Adds a new asset to an existing portfolio. Requires details such as asset code, type, and associated portfolio Id. Returns the newly created asset Id."
+                })
                 .WithName("AddAsset")
                 .WithTags("Asset");
             }

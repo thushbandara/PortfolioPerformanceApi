@@ -27,6 +27,11 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                     return Results.Ok(await _sender.Send(new CreatePortfolioCommand(request)));
                 })
                 .WithValidation<CreatePortfolioRequestDto>()
+                 .WithOpenApi(operation => new(operation)
+                 {
+                     Summary = "Create a new portfolio",
+                     Description = "Creates a new portfolio in the system. Requires a portfolio name and returns the Id of the newly created portfolio."
+                 })
                 .WithName("CreatePortfolio")
                 .WithTags("Portfolio");
             }

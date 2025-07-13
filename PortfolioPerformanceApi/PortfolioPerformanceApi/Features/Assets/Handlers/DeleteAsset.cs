@@ -25,6 +25,11 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
                 {
                     return Results.Ok(await _sender.Send(new DeleteAssetCommand(id)));
                 })
+                 .WithOpenApi(operation => new(operation)
+                 {
+                     Summary = "Delete an asset by Id",
+                     Description = "Deletes an existing asset from the portfolio by its Id. Returns the deleted asset Id upon success."
+                 })
                 .WithName("DeleteAsset")
                 .WithTags("Asset");
             }

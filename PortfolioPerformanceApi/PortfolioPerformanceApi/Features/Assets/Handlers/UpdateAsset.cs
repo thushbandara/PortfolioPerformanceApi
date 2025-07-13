@@ -26,6 +26,11 @@ namespace PortfolioPerformance.Api.Features.Assets.Handlers
                 {
                     return Results.Ok(await _sender.Send(new UpdateAssetCommand(id, request)));
                 })
+                 .WithOpenApi(operation => new(operation)
+                 {
+                     Summary = "Update an asset by Id",
+                     Description = "Updates the details of an existing asset in the system by its Id. Returns the updated asset Id upon success."
+                 })
                 .WithName("UpdateAsset")
                 .WithTags("Asset");
             }

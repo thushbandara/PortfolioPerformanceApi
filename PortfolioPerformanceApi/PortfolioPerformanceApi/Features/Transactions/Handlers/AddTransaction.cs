@@ -27,9 +27,14 @@ namespace PortfolioPerformance.Api.Features.Transactions.Handlers
                 {
                     return Results.Ok(await _sender.Send(new CreateTransactionCommand(request)));
                 })
-                .WithValidation<CreateTransactionRequestDto>()
-                .WithName("CreateTransaction")
-                .WithTags("Transaction");
+                 .WithValidation<CreateTransactionRequestDto>()
+                 .WithOpenApi(operation => new(operation)
+                 {
+                     Summary = "Create a new transaction",
+                     Description = "Creates a new transaction for a specific asset. The transaction can be of type 'Buy' or 'Sell' and must include asset ID, quantity, price, and date. Returns the Id of the newly created transaction."
+                 })
+                 .WithName("CreateTransaction")
+                 .WithTags("Transaction");
             }
         }
 

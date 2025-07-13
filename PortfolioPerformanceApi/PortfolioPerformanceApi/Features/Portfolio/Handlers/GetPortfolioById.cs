@@ -26,6 +26,11 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                 {
                     return Results.Ok(await _sender.Send(new GetPortfolioQuery(id)));
                 })
+                 .WithOpenApi(operation => new(operation)
+                 {
+                     Summary = "Get portfolio by Id",
+                     Description = "Retrieves a portfolio's details from the system by its id. Returns portfolio information including name, assets."
+                 })
                 .WithName("GetPortfolioById")
                 .WithTags("Portfolio");
             }

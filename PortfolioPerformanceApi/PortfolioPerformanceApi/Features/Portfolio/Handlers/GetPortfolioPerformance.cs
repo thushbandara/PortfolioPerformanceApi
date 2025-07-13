@@ -27,6 +27,11 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                 {
                     return Results.Ok(await _sender.Send(new GetPortfolioPerformanceQuery(portfolioId, from, to)));
                 })
+                 .WithOpenApi(operation => new(operation)
+                 {
+                     Summary = "Get portfolio performance",
+                     Description = "Retrieves the performance of a specific portfolio within the given date range. Returns total value, asset allocations, realized gains, and unrealized gains."
+                 })
                 .WithName("PortfolioPerfomance")
                 .WithTags("Portfolio");
             }

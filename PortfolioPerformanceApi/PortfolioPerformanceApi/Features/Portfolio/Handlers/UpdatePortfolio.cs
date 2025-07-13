@@ -28,6 +28,11 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                     return Results.Ok(await _sender.Send(new UpdatePortfolioCommand(id, request)));
                 })
                 .WithValidation<UpdatePortfolioRequestDto>()
+                .WithOpenApi(operation => new(operation)
+                {
+                    Summary = "Update an existing portfolio",
+                    Description = "Updates the details of an existing portfolio by its Id. Accepts changes such as portfolio name and other metadata. Returns the updated portfolio Id."
+                })
                 .WithName("UpdatePortfolio")
                 .WithTags("Portfolio");
             }
