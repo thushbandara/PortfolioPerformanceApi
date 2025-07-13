@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using PortfolioPerformance.Api.Features.Portfolio.Repositories;
 using PortfolioPerformance.Api.Infrastructure.Common;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
@@ -22,10 +23,14 @@ namespace PortfolioPerformance.Api.Infrastructure
         /// <returns></returns>
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddDbContext<PortfolioPerformanceContext>(opt => opt.UseInMemoryDatabase("PortfolioDb"));
             services.AddScoped(typeof(IPortfolioPerformanceRepository<>), typeof(PortfolioPerformanceRepository<>));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddValidatorsFromAssemblyContaining(typeof(ModelValidate<>));
+
             services.AddScoped<IEntityMapper, EntityMapper>();
             services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 

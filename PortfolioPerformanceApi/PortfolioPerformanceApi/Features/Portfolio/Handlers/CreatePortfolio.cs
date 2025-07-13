@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PortfolioPerformance.Api.Features.Portfolio.DTO.Request;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Extensions;
 using PortfolioPerformance.Data.Contracts;
 
 namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
@@ -25,6 +26,7 @@ namespace PortfolioPerformance.Api.Features.Portfolio.Handlers
                 {
                     return Results.Ok(await _sender.Send(new CreatePortfolioCommand(request)));
                 })
+                .WithValidation<CreatePortfolioRequestDto>()
                 .WithName("CreatePortfolio")
                 .WithTags("Portfolio");
             }

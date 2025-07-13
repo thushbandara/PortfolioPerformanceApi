@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using PortfolioPerformance.Api.Features.Assets.DTO.Request;
 using PortfolioPerformance.Api.Features.Transactions.DTO.Request;
 using PortfolioPerformance.Api.Infrastructure.Contracts;
+using PortfolioPerformance.Api.Infrastructure.Extensions;
 using PortfolioPerformance.Data.Contracts;
 
 namespace PortfolioPerformance.Api.Features.Transactions.Handlers
@@ -25,6 +27,7 @@ namespace PortfolioPerformance.Api.Features.Transactions.Handlers
                 {
                     return Results.Ok(await _sender.Send(new CreateTransactionCommand(request)));
                 })
+                .WithValidation<CreateTransactionRequestDto>()
                 .WithName("CreateTransaction")
                 .WithTags("Transaction");
             }
